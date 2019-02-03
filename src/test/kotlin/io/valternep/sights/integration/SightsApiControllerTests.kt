@@ -1,10 +1,8 @@
 package io.valternep.sights.integration
 
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.valternep.sights.controller.SightsApiController
-import io.valternep.sights.models.Author
-import io.valternep.sights.models.Contact
-import io.valternep.sights.models.Description
 import io.valternep.sights.models.Sight
 import io.valternep.sights.repository.SightsRepository
 import org.junit.Before
@@ -19,7 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer
 import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
-import java.util.UUID
+import java.io.FileReader
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -33,38 +31,27 @@ class SightsApiControllerTests {
 
     private val gson = Gson()
 
+    private val sightsCollectionFilepath = "src/test/kotlin/io/valternep/sights/integration/examples/Sight.json"
+
+    private val listOfSights = gson.fromJson<List<Sight>>(
+        FileReader(sightsCollectionFilepath),
+        object : TypeToken<List<Sight>>() {}.type
+    )
+
     @Before
     fun setUp() {
         sightsRepository.deleteAll()
+        listOfSights.forEach { sightsRepository.save(it) }
     }
 
     @Test
     fun `GET to sights endpoint`() {
-        val sights = listOf(
-            Sight(
-                id = UUID.randomUUID().toString().replace("-", ""),
-                citySdkId = "citySdkId",
-                base = "base",
-                labels = listOf(),
-                descriptions = listOf(
-                    Description("descriptionId", "description", "en")
-                ),
-                locations = listOf(),
-                websites = listOf(),
-                contact = Contact("phoneNumber", "emailAddress"),
-                schedules = listOf(),
-                images = listOf(),
-                author = Author("authorId", "source")
-            )
-        )
-        sightsRepository.save(sights.first())
-
         val mockMvc = MockMvcBuilders.standaloneSetup(sightsApiController)
             .apply<StandaloneMockMvcBuilder>(SharedHttpSessionConfigurer.sharedHttpSession())
             .build()
 
         mockMvc.perform(get("/sights"))
             .andExpect(status().isOk)
-            .andExpect(content().json(gson.toJson(sights)))
+            .andExpect(content().json(gson.toJson(listOfSights)))
     }
 }
