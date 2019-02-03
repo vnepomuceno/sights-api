@@ -1,18 +1,20 @@
 package io.valternep.sights.models
 
+import org.springframework.data.mongodb.core.mapping.Document
 import java.util.UUID
 
+@Document(collection = "Sight")
 data class Sight(
     val id: String = newUIID(),
     val citySdkId: String,
     val base: String,
     val labels: List<Label>,
-    val descriptions: List<Description>,
-    val locations: List<Location>,
-    val websites: List<Website>,
-    val contact: Contact,
-    val schedules: List<Schedule>,
-    val images: List<Image>,
+    val descriptions: List<Description>?,
+    val locations: List<Location>?,
+    val websites: List<Website>?,
+    val contact: Contact?,
+    val schedules: List<Schedule>?,
+    val images: List<Image>?,
     val author: Author
 )
 
@@ -20,7 +22,7 @@ data class Label(
     val id: String = newUIID(),
     val term: String,
     val value: String,
-    val language: String
+    val language: String?
 )
 
 data class Description(
@@ -44,8 +46,8 @@ data class Website(
 )
 
 data class Contact(
-    val phoneNumber: String,
-    val emailAddress: String
+    val phoneNumber: String?,
+    val emailAddress: String?
 )
 
 data class Schedule(
