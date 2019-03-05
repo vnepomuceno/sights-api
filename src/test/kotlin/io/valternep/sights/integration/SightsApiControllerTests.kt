@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken
 import io.valternep.sights.controller.SightsApiController
 import io.valternep.sights.models.Sight
 import io.valternep.sights.repository.SightsRepository
+import org.bson.types.ObjectId
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,5 +54,17 @@ class SightsApiControllerTests {
         mockMvc.perform(get("/sights"))
             .andExpect(status().isOk)
             .andExpect(content().json(gson.toJson(listOfSights)))
+    }
+
+    @Test
+    fun `GET to sights detail endpoint`() {
+        val sightId = "59c43d27dd5e3d0a02433b4c"
+        val mockMvc = MockMvcBuilders.standaloneSetup(sightsApiController)
+            .apply<StandaloneMockMvcBuilder>(SharedHttpSessionConfigurer.sharedHttpSession())
+            .build()
+
+        mockMvc.perform(get("/sights/$sightId"))
+            .andExpect(status().isOk)
+            .andExpect(content().json(gson.toJson(sightsRepository.findById(ObjectId(sightId)))))
     }
 }

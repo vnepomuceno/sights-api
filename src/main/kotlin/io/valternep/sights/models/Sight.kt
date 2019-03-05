@@ -1,11 +1,12 @@
 package io.valternep.sights.models
 
+import org.bson.types.ObjectId
 import org.springframework.data.mongodb.core.mapping.Document
 import java.util.UUID
 
 @Document(collection = "Sight")
 data class Sight(
-    val id: String = newUIID(),
+    val id: ObjectId,
     val citySdkId: String,
     val base: String,
     val labels: List<Label>,

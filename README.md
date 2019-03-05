@@ -68,3 +68,39 @@ Response
   }
 ]
 ```
+
+### `GET /sights/:id`
+
+Fetches Sight with `id` from the database.
+
+Request
+```bash
+http GET https://sights-api-stg.herokuapp.com/sights/59c43d27dd5e3d0a02433b4c
+```
+
+Response
+```json
+{
+  "author": {
+    "id": "31ab7bf08f4247f08a7755630a9e2561",
+    "source": "open-data"
+  },
+  "base": "http://tourism.citysdk.cm-lisboa.pt/pois/",
+  "citySdkId": "52d7bf7d723e8e0b0cc09138",
+  "contact": null,
+  "descriptions": null,
+  "id": "59c43d1bdd5e3d0a02433b47",
+  "images": null,
+  "labels": [
+    {
+      "id": "0f25c629ced04ac4913fafcbe1903dc9",
+      "language": null,
+      "term": "primary",
+      "value": "Miradouro do Jardim Botânico da Ajuda"
+    }
+  ],
+  "locations": null,
+  "schedules": null,
+  "websites": null
+}
+```
