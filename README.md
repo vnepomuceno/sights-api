@@ -1,70 +1,120 @@
 # Sights API
 
+## Environments
+
+- Development: https://sights-api-dev.herokuapp.com
+
 ## Endpoints
 
 ### `GET /sights`
 
-Fetches all Sights from the database.
+Returns a list of all Sights with overview information.
 
 Request
 ```bash
-http GET https://sights-api-stg.herokuapp.com/sights
+http GET <BASE_URL>/sights
 ```
 
 Response
 ```json
 [
   {
-    "author": {
-      "id": "31ab7bf08f4247f08a7755630a9e2561",
-      "source": "open-data"
-    },
-    "base": "http://tourism.citysdk.cm-lisboa.pt/pois/",
-    "citySdkId": "52d7bf7d723e8e0b0cc09138",
-    "contact": null,
-    "descriptions": null,
     "id": "59c43d1bdd5e3d0a02433b47",
-    "images": null,
-    "labels": [
-      {
-        "id": "0f25c629ced04ac4913fafcbe1903dc9",
-        "language": null,
-        "term": "primary",
-        "value": "Miradouro do Jardim Botânico da Ajuda"
-      }
-    ],
-    "locations": null,
-    "schedules": null,
-    "websites": null
+    "name": "Miradouro do Jardim Botânico da Ajuda",
+    "cover_photo": "4AAQSkZJRgABAQEASABIAAD/2wBDAAgGBgcGBQgHBwcJCQgKD",
+    "distance_from_user_meters": 3700,
+    "user_arrives_in_minutes": 20,
+    "rating": 4.5,
+    "favorites": 18
   },
   {
-    "author": {
-      "id": "cca9fe4d60624d7cb1357057f9cfcd16",
-      "source": "open-data"
-    },
-    "base": "http://tourism.citysdk.cm-lisboa.pt/pois/",
-    "citySdkId": "52d7bf7a723e8e0b0cc090cf",
-    "contact": null,
-    "descriptions": null,
-    "id": "59c43d26dd5e3d0a02433b49",
-    "images": [
-      {
-        "href": "http://www.cm-lisboa.pt/uploads/pics/tt_address/lxi-1682-01.jpg",
-        "id": "984dcd6fccdd42aabea2e45867ff328e",
-        "type": "image/jpeg"
-      }
-    ],
-    "labels": [
-      {
-        "id": "a598fb0fa3794942ba88f8e665cabc6c",
-        "language": null,
-        "term": "primary",
-        "value": "Miradouro Mercado Chão de Loureiro"
-      }
-    ],
-    "locations": null,
-    "schedules": null,
-    "websites": null
-  }
+      "id": "59c43d1bdd5e3d0a02433b47",
+      "name": "Miradouro Mercado Chão de Loureiro",
+      "cover_photo": "AhEBAxEB/8QAHwAAAQUBAQEBAQEAAcAKAECAwQFBgcICQoL",
+      "distance_from_user_meters": 1200,
+      "user_arrives_in_minutes": 8,
+      "rating": 3.1,
+      "favorites": 12
+    }
 ]
 ```
+---
+
+### `GET /sights/:id`
+
+Complete information about a Sight with `id`.
+
+Request
+```bash
+http GET <BASE_URL>/sights/59c43d27dd5e3d0a02433b4c
+```
+
+Response
+```json
+{
+  "author": {
+    "id": "31ab7bf08f4247f08a7755630a9e2561",
+    "source": "open-data"
+  },
+  "base": "http://tourism.citysdk.cm-lisboa.pt/pois/",
+  "citySdkId": "52d7bf7d723e8e0b0cc09138",
+  "contact": null,
+  "descriptions": null,
+  "id": "59c43d1bdd5e3d0a02433b47",
+  "images": null,
+  "labels": [
+    {
+      "id": "0f25c629ced04ac4913fafcbe1903dc9",
+      "language": null,
+      "term": "primary",
+      "value": "Miradouro do Jardim Botânico da Ajuda"
+    }
+  ],
+  "locations": null,
+  "schedules": null,
+  "websites": null
+}
+```
+---
+
+### `POST /sights/:id/rate`
+
+Submits a rating for a Sight with `id`.
+
+Request
+```bash
+http POST <BASE_URL>/sights/59c43d27dd5e3d0a02433b4c/rate rating=3 
+```
+---
+
+### `POST /sights/:id/favorite`
+
+Submits a favorite for a Sight with `id`.
+
+Request
+```bash
+http POST <BASE_URL>/sights/59c43d27dd5e3d0a02433b4c/favorite
+```
+---
+
+### `POST /feedback`
+
+Submits a feedback suggestion.
+
+Request
+```bash
+http POST <BASE_URL>/feedback
+```
+---
+
+### `POST /users/:email/login`
+
+Logs user in with `email`.
+
+---
+
+### `POST /users/register`
+
+Registers user.
+
+---
