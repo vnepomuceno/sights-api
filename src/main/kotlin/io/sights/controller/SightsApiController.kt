@@ -1,6 +1,6 @@
 package io.sights.controller
 
-import io.sights.models.Sight
+import io.sights.models.SightOverview
 import io.sights.repository.SightsRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -11,7 +11,15 @@ class SightsApiController(
 ) {
 
     @GetMapping("/sights")
-    fun getAllSights(): List<Sight> {
-        return sightsRepository.findAll()
+    fun getAllSights(): List<SightOverview> {
+        return sightsRepository.findAll().map { sight ->
+            SightOverview(
+                id = sight.id,
+                name = sight.labels.first().value,
+                coverPhoto = sight.images?.first()?.href,
+                distanceFromUserMeters = null,
+                userArrivesInMinutes = null
+            )
+        }
     }
 }

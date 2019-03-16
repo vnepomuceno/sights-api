@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.sights.controller.SightsApiController
 import io.sights.models.Sight
+import io.sights.models.SightOverview
 import io.sights.repository.SightsRepository
 import java.io.FileReader
 import org.junit.Before
@@ -45,12 +46,22 @@ class SightsApiControllerTests {
 
     @Test
     fun `GET to sights endpoint`() {
+        val listOfSightOverviews = listOfSights.map { sight ->
+            SightOverview(
+                id = sight.id,
+                name = sight.labels.first().value,
+                coverPhoto = null,
+                distanceFromUserMeters = null,
+                userArrivesInMinutes = null
+            )
+        }
+
         val mockMvc = MockMvcBuilders.standaloneSetup(sightsApiController)
             .apply<StandaloneMockMvcBuilder>(SharedHttpSessionConfigurer.sharedHttpSession())
             .build()
 
         mockMvc.perform(get("/sights"))
             .andExpect(status().isOk)
-            .andExpect(content().json(gson.toJson(listOfSights)))
+            .andExpect(content().json(gson.toJson(listOfSightOverviews)))
     }
 }
