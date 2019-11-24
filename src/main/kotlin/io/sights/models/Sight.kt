@@ -1,48 +1,48 @@
 package io.sights.models
 
-import org.springframework.data.mongodb.core.mapping.Document
 import java.util.UUID
+import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "Sight")
 data class Sight(
-        val id: String = newUIID(),
-        val citySdkId: String,
-        val base: String,
-        val labels: List<Label>,
-        val descriptions: List<Description>?,
-        val locations: List<Location>?,
-        val websites: List<Website>?,
-        val contact: Contact?,
-        val schedules: List<Schedule>?,
-        val images: List<Image>?,
-        val author: Author
+    val id: String = newUIID(),
+    val citySdkId: String,
+    val base: String,
+    val labels: List<Label>,
+    val descriptions: List<Description>?,
+    val locations: List<Location>?,
+    val websites: List<Website>?,
+    val contact: Contact?,
+    val schedules: List<Schedule>?,
+    val images: List<Image>?,
+    val author: Author
 )
 
 data class Label(
-        val id: String = newUIID(),
-        val term: String,
-        val value: String,
-        val language: String?
+    val id: String = newUIID(),
+    val term: String,
+    val value: String,
+    val language: String?
 )
 
 data class Description(
-        val id: String = newUIID(),
-        val value: String,
-        val lang: String
+    val id: String = newUIID(),
+    val value: String,
+    val lang: String
 )
 
 data class Location(
-        val id: String = newUIID(),
-        val address: String,
-        val city: String,
-        val country: String,
-        val coordinates: String
+    val id: String = newUIID(),
+    val address: String,
+    val city: String,
+    val country: String,
+    val coordinates: String
 )
 
 data class Website(
-        val id: String = newUIID(),
-        val href: String,
-        val type: String
+    val id: String = newUIID(),
+    val href: String,
+    val type: String
 )
 
 data class Contact(
@@ -51,19 +51,19 @@ data class Contact(
 )
 
 data class Schedule(
-        val id: String = newUIID(),
-        val open: String
+    val id: String = newUIID(),
+    val open: String
 )
 
 data class Image(
-        val id: String = newUIID(),
-        val href: String,
-        val type: String
+    val id: String = newUIID(),
+    val href: String,
+    val type: String
 )
 
 data class Author(
-        val id: String = newUIID(),
-        val source: String
+    val id: String = newUIID(),
+    val source: String
 )
 
 private fun newUIID() = UUID.randomUUID().toString().replace("-", "")
