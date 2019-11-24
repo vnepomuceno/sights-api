@@ -1,4 +1,4 @@
-package io.valternep.sights
+package io.sights
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,4 +1,4 @@
-package io.valternep.sights
+package io.sights
 
 import org.junit.Test
 import org.junit.runner.RunWith

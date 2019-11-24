@@ -1,10 +1,11 @@
-package io.valternep.sights.integration
+package io.sights.integration
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import io.valternep.sights.controller.SightsApiController
-import io.valternep.sights.models.Sight
-import io.valternep.sights.repository.SightsRepository
+import io.sights.controller.SightsApiController
+import io.sights.models.Sight
+import io.sights.repository.SightsRepository
+import java.io.FileReader
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +18,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer
 import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
-import java.io.FileReader
 
 @RunWith(SpringRunner::class)
 @SpringBootTest

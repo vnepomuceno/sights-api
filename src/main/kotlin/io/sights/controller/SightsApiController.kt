@@ -1,7 +1,7 @@
-package io.valternep.sights.controller
+package io.sights.controller
 
-import io.valternep.sights.models.Sight
-import io.valternep.sights.repository.SightsRepository
+import io.sights.models.Sight
+import io.sights.repository.SightsRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 

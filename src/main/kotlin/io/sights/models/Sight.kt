@@ -1,7 +1,7 @@
-package io.valternep.sights.models
+package io.sights.models
 
-import org.springframework.data.mongodb.core.mapping.Document
 import java.util.UUID
+import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "Sight")
 data class Sight(
