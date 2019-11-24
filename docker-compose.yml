@@ -16,7 +16,6 @@ services:
 
   mongo:
     image: mongo:4.2.1
-    command: "--smallfiles"
 
   dev:
     <<: *BASE
