@@ -20,7 +20,7 @@ apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'io.valternep.sights'
+group = 'io.sights'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 

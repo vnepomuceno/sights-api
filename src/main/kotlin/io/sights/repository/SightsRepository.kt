@@ -1,6 +1,6 @@
-package io.valternep.sights.repository
+package io.sights.repository
 
-import io.valternep.sights.models.Sight
+import io.sights.models.Sight
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
