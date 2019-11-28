@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer
 import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
+import org.springframework.util.ResourceUtils
+import java.io.File
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -30,18 +32,15 @@ class SightsApiControllerTests {
     private lateinit var sightsRepository: SightsRepository
 
     private val gson = Gson()
-
-    private val sightsCollectionFilepath = "src/test/kotlin/io/valternep/sights/integration/examples/Sight.json"
-
     private val listOfSights = gson.fromJson<List<Sight>>(
-        FileReader(sightsCollectionFilepath),
+        FileReader(ResourceUtils.getFile("classpath:Sight.json")),
         object : TypeToken<List<Sight>>() {}.type
     )
 
     @Before
     fun setUp() {
         sightsRepository.deleteAll()
-        listOfSights.forEach { sightsRepository.save(it) }
+        sightsRepository.saveAll(listOfSights)
     }
 
     @Test
