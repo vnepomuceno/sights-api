@@ -1,7 +1,8 @@
 package io.sights.integration
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.nhaarman.mockito_kotlin.whenever
 import io.sights.controller.SightsApiController
 import io.sights.models.Sight
 import io.sights.repository.SightsRepository
@@ -10,48 +11,41 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer
-import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
+import org.springframework.util.ResourceUtils
 
 @RunWith(SpringRunner::class)
-@SpringBootTest
+@WebMvcTest(controllers = [SightsApiController::class])
 class SightsApiControllerTests {
 
-    @Autowired
-    private lateinit var sightsApiController: SightsApiController
-
-    @Autowired
+    @MockBean
     private lateinit var sightsRepository: SightsRepository
 
-    private val gson = Gson()
+    @Autowired
+    private lateinit var mockMvc: MockMvc
 
-    private val sightsCollectionFilepath = "src/test/kotlin/io/valternep/sights/integration/examples/Sight.json"
+    @Autowired
+    private lateinit var objectMapper: ObjectMapper
 
-    private val listOfSights = gson.fromJson<List<Sight>>(
-        FileReader(sightsCollectionFilepath),
-        object : TypeToken<List<Sight>>() {}.type
-    )
+    private lateinit var sights: List<Sight>
 
     @Before
-    fun setUp() {
-        sightsRepository.deleteAll()
-        listOfSights.forEach { sightsRepository.save(it) }
+    fun setup() {
+        sights = objectMapper.readValue(FileReader(ResourceUtils.getFile("classpath:Sight.json")))
     }
 
     @Test
     fun `GET to sights endpoint`() {
-        val mockMvc = MockMvcBuilders.standaloneSetup(sightsApiController)
-            .apply<StandaloneMockMvcBuilder>(SharedHttpSessionConfigurer.sharedHttpSession())
-            .build()
+        whenever(sightsRepository.findAll()).thenReturn(sights)
 
         mockMvc.perform(get("/sights"))
             .andExpect(status().isOk)
-            .andExpect(content().json(gson.toJson(listOfSights)))
+            .andExpect(content().json(objectMapper.writeValueAsString(sights)))
     }
 }
