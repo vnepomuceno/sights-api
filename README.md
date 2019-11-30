@@ -1,5 +1,7 @@
 # Sights API
 
+![Build Status](https://travis-ci.com/Vnepomuceno/sights-api.svg?token=qYT5CezVQyhwycXS4dtu&branch=master)
+
 ## Environments
 
 - Development: https://sights-api-dev.herokuapp.com
