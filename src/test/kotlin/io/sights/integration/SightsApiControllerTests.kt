@@ -6,7 +6,6 @@ import com.nhaarman.mockito_kotlin.whenever
 import io.sights.controller.SightsApiController
 import io.sights.models.Sight
 import io.sights.repository.SightsRepository
-import java.io.FileReader
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.util.ResourceUtils
+import java.io.FileReader
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(controllers = [SightsApiController::class])
