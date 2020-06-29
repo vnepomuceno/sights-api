@@ -1,7 +1,7 @@
 package io.sights.models
 
-import java.util.UUID
 import org.springframework.data.mongodb.core.mapping.Document
+import java.util.UUID
 
 @Document(collection = "Sight")
 data class Sight(
