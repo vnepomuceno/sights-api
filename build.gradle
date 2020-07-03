@@ -41,6 +41,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"
+
+    api ("de.codecentric:spring-boot-admin-starter-server:2.2.2")
+    api ("de.codecentric:spring-boot-admin-starter-client:2.2.2")
 }
 
 configurations {

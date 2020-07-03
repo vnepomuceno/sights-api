@@ -6,7 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB=DEBUG
       - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_OUTPUT_ANSI_ENABLED=always
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://localhost:8080
+      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=*
+      - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
     depends_on:
       - mongo
 
