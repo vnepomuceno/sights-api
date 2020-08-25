@@ -2,7 +2,7 @@ buildscript {
     ext {
         kotlinVersion = '1.3.72'
         springBootVersion = '2.3.2.RELEASE'
-        ktlintVersion = '0.37.2'
+        ktlintVersion = '0.38.1'
         mockitoKotlinVersion = '1.6.0'
     }
     repositories {
