@@ -6,13 +6,13 @@ import com.nhaarman.mockito_kotlin.whenever
 import io.sights.controller.SightsApiController
 import io.sights.models.Sight
 import io.sights.repository.SightsRepository
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.util.ResourceUtils
 import java.io.FileReader
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @WebMvcTest(controllers = [SightsApiController::class])
 class SightsApiControllerTests {
 
@@ -35,7 +35,7 @@ class SightsApiControllerTests {
 
     private lateinit var sights: List<Sight>
 
-    @Before
+    @BeforeEach
     fun setup() {
         sights = objectMapper.readValue(FileReader(ResourceUtils.getFile("classpath:Sight.json")))
     }
