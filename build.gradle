@@ -67,7 +67,6 @@ compileTestKotlin {
 
 task ktlint(type: JavaExec, group: "verification") {
     description = "Check Kotlin code style."
-    main = "com.pinterest.ktlint.Main"
     classpath = configurations.ktlint
     args "--color"
 }
@@ -76,7 +75,6 @@ check.dependsOn ktlint
 
 task ktlintFormat(type: JavaExec, group: "formatting") {
     description = "Fix Kotlin code style deviations."
-    main = "com.pinterest.ktlint.Main"
     classpath = configurations.ktlint
     args "--color", "-F"
 }
